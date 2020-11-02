@@ -1,0 +1,2 @@
+# Sprinter
+Simple Sprint Tracker

@@ -1,0 +1,16 @@
+config:
+  githubUrl: https://api.github.com/graphql # change if you use GH enterprise
+  githubToken: xxx # GH personal access token
+
+  userList: # GH user list
+    - yyy
+    - zzz
+
+  sprintList: # define your sprints here
+    - title: Sprint Zero
+      duration: 2020-10-13..2020-10-26
+    - title: Sprint 1
+      duration: 2020-10-27..2020-11-9
+
+server:
+  port: 8013

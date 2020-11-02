@@ -1,0 +1,54 @@
+query Contribution($query: String!) {
+    search(query: $query, type: ISSUE, last: 100) {
+        nodes {
+            ... on PullRequest {
+                id
+                title
+                body
+                bodyHTML
+                commits(last: 10) {
+                    nodes {
+                        commit {
+                            message
+                            messageBodyHTML
+                            committer {
+                                name
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+query Issues($query: String!) {
+    search(query: $query, type: ISSUE, last: 100) {
+        nodes {
+            ... on Issue {
+                title
+                url
+                assignees(first: 3) {
+                    nodes {
+                        login
+                    }
+                }
+            }
+        }
+    }
+}
+
+query Review($query: String!) {
+    search(query: $query, type: ISSUE, last: 100) {
+        nodes {
+            ... on PullRequest {
+                id
+                assignees(first: 1) {
+                    nodes {
+                        login
+                    }
+                }
+            }
+        }
+    }
+}
