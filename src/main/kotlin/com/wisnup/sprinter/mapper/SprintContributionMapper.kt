@@ -103,7 +103,7 @@ class SprintContributionMapper {
     private fun getWeightFromTitle(title: String?): Int {
         if (title == null) return 0
 
-        val p = Pattern.compile("\\[SP=(.*?)]")
+        val p = Pattern.compile("\\[[sS][pP]=(.*?)]")
         val m = p.matcher(title)
 
         return if (m.find()) {
