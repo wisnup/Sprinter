@@ -34,8 +34,8 @@ class CountSprintChore (
                 }
 
                 result?.let { queryData ->
-                    logger.info("COBI bug fix query $query")
-                    logger.info("COBI bug fix result ${sprint.title} ${queryData.toJson()}")
+                    logger.info("COBI chore query $query")
+                    logger.info("COBI chore result ${sprint.title} ${queryData.toJson()}")
                     if (contributionMap.containsKey(key)) {
                         // update user key
                         contributionMap[key]?.add(
