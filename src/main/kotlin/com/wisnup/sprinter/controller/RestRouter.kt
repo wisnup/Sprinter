@@ -9,7 +9,7 @@ class RestRouter(private val handler: RestRequestHandler) {
             GET("/") { handler.getStoryContribution() }
         }
         "/reviews".nest {
-            GET("/") { handler.getReviewContribution() }
+            GET("/") { handler.getPrReviewContribution() }
         }
     }
 }

@@ -17,7 +17,7 @@ class RestRequestHandler(
                 .bodyValueAndAwait(countSprintStory.execute())
     }
 
-    suspend fun getReviewContribution(): ServerResponse {
+    suspend fun getPrReviewContribution(): ServerResponse {
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValueAndAwait(countSprintPrReview.execute())
