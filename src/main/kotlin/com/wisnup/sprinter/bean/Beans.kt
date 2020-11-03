@@ -22,7 +22,7 @@ fun beans() = beans {
      */
     bean<AppConfig>()
     /**
-     * GraphQL
+     * GraphQL and network
      */
     bean {
         OkHttpClientConfiguration(ref<AppConfig>())
@@ -38,7 +38,7 @@ fun beans() = beans {
         GraphQlClient(ref<ApolloClient>())
     }
     /**
-     * Service and network
+     * Service and router
      */
     bean {
         RestRouter(ref<RestRequestHandler>()).routes()
