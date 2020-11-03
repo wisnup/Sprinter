@@ -4,25 +4,25 @@ import com.apollographql.apollo.api.toJson
 import com.wisnup.sprinter.config.AppConfig
 import com.wisnup.sprinter.config.GroupContributionBy
 import com.wisnup.sprinter.mapper.SprintContributionMapper
-import com.wisnup.sprinter.model.SprintBugFixContribution
+import com.wisnup.sprinter.model.SprintChoreContribution
 import com.wisnup.sprinter.service.GithubService
 import mu.KotlinLogging
 import java.util.*
 
 private val logger = KotlinLogging.logger {}
 
-class CountSprintChore (
+class CountSprintChore(
         private val githubService: GithubService,
         private val appConfig: AppConfig,
         private val sprintMapper: SprintContributionMapper
 ) {
 
-    suspend fun execute(groupBy: GroupContributionBy): Map<String, List<SprintBugFixContribution>> {
+    suspend fun execute(groupBy: GroupContributionBy): Map<String, List<SprintChoreContribution>> {
         val users = appConfig.userList
         val sprints = appConfig.sprintList
         val choreLabel = appConfig.choreLabel
 
-        val contributionMap = TreeMap<String, MutableList<SprintBugFixContribution>>()
+        val contributionMap = TreeMap<String, MutableList<SprintChoreContribution>>()
         users.forEach { user ->
             sprints.forEach { sprint ->
                 val query = "is:issue is:closed assignee:$user closed:${sprint.duration} $choreLabel"
@@ -39,12 +39,12 @@ class CountSprintChore (
                     if (contributionMap.containsKey(key)) {
                         // update user key
                         contributionMap[key]?.add(
-                                sprintMapper.mapSprintBugFix(queryData, sprint.title, user, groupBy)
+                                sprintMapper.mapSprintChore(queryData, sprint.title, user, groupBy)
                         )
                     } else {
                         // new user key
                         contributionMap[key] = mutableListOf(
-                                sprintMapper.mapSprintBugFix(queryData, sprint.title, user, groupBy)
+                                sprintMapper.mapSprintChore(queryData, sprint.title, user, groupBy)
                         )
                     }
                 }
