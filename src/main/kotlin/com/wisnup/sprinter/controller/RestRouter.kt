@@ -18,5 +18,8 @@ class RestRouter(private val handler: RestRequestHandler) {
         "/fixes".nest {
             GET("/", handler::getBugFixContribution)
         }
+        "/chores".nest {
+            GET("/", handler::getChoreContribution)
+        }
     }
 }

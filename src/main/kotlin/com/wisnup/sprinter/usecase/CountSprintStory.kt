@@ -21,7 +21,6 @@ class CountSprintStory (
         val users = appConfig.userList
         val sprints = appConfig.sprintList
 
-        // key is user
         val contributionMap = TreeMap<String, MutableList<SprintStoryContribution>>()
         users.forEach { user ->
             sprints.forEach { sprint ->

@@ -9,7 +9,7 @@ plugins {
 	id("com.apollographql.apollo") version "2.4.1"
 }
 
-group = "com.quipper"
+group = "com.wisnup"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 

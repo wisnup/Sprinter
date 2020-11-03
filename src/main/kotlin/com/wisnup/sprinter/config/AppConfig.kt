@@ -9,4 +9,5 @@ class AppConfig {
     lateinit var userList: List<String>
     lateinit var sprintList: List<Sprint>
     lateinit var bugLabel: String
+    lateinit var choreLabel: String
 }

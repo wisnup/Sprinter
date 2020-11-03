@@ -2,11 +2,13 @@ config:
   githubUrl: https://api.github.com/graphql # change if you use GH enterprise
   githubToken: xxx # GH personal access token
 
-  userList: # GH user list
+  userList: # GH username list
     - yyy
     - zzz
 
   sprintList: # define your sprints here
+    - title: Sprint 43
+      duration: 2020-09-15..2020-09-28
     - title: Sprint 44
       duration: 2020-09-29..2020-10-12
     - title: Sprint 45
@@ -15,6 +17,7 @@ config:
       duration: 2020-10-27..2020-11-9
 
   bugLabel: label:Bug # customize your bug label
+  choreLabel: label:Chore # customize your chore label
 
 server:
   port: 8013

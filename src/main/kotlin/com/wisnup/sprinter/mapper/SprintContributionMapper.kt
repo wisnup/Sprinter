@@ -3,6 +3,7 @@ package com.wisnup.sprinter.mapper
 import com.github.IssuesQuery
 import com.wisnup.sprinter.config.GroupContributionBy
 import com.wisnup.sprinter.model.SprintBugFixContribution
+import com.wisnup.sprinter.model.SprintChoreContribution
 import com.wisnup.sprinter.model.SprintReviewContribution
 import com.wisnup.sprinter.model.SprintStoryContribution
 import java.util.regex.Pattern
@@ -11,14 +12,14 @@ import java.util.regex.Pattern
 class SprintContributionMapper {
 
     fun mapSprintStory(data: IssuesQuery.Data, sprint: String, user: String, groupBy: GroupContributionBy): SprintStoryContribution {
-        var totalStories = 0
+        var totalStory = 0
         var totalWeight = 0
         val pairingSet = mutableSetOf<String>()
         data.search.nodes?.forEach { queryData ->
             val issue = queryData?.asIssue
             totalWeight += getWeightFromTitle(issue?.title)
             if (totalWeight > 0) {
-                totalStories += 1
+                totalStory += 1
             }
             issue?.assignees?.nodes?.forEach {
                 val assignee = it?.login
@@ -31,17 +32,17 @@ class SprintContributionMapper {
         return SprintStoryContribution(
                 key = if (groupBy == GroupContributionBy.SPRINT) { user } else sprint,
                 pairing = pairingSet,
-                sprintTotalIssue = totalStories,
-                sprintTotalWeight = totalWeight
+                sprintTotalIssue = totalStory,
+                sprintTotalPoint = totalWeight
         )
     }
 
     fun mapSprintPrReview(data: IssuesQuery.Data, sprint: String, user: String, groupBy: GroupContributionBy): SprintReviewContribution {
-        var totalReviews = 0
+        var totalPrReview = 0
         val pairingSet = mutableSetOf<String>()
         data.search.nodes?.forEach { queryData ->
             val issue = queryData?.asIssue
-            totalReviews += 1
+            totalPrReview += 1
             issue?.assignees?.nodes?.forEach {
                 val assignee = it?.login
                 if (assignee != null && assignee != user) {
@@ -53,16 +54,16 @@ class SprintContributionMapper {
         return SprintReviewContribution(
                 key = if (groupBy == GroupContributionBy.SPRINT) { user } else sprint,
                 pairing = pairingSet,
-                sprintTotalReview = totalReviews
+                sprintTotalReview = totalPrReview
         )
     }
 
     fun mapSprintBugFix(data: IssuesQuery.Data, sprint: String, user: String, groupBy: GroupContributionBy): SprintBugFixContribution {
-        var bugFixes = 0
+        var totalBugFix = 0
         val pairingSet = mutableSetOf<String>()
         data.search.nodes?.forEach { queryData ->
             val issue = queryData?.asIssue
-            bugFixes += 1
+            totalBugFix += 1
             issue?.assignees?.nodes?.forEach {
                 val assignee = it?.login
                 if (assignee != null && assignee != user) {
@@ -74,7 +75,28 @@ class SprintContributionMapper {
         return SprintBugFixContribution(
                 key = if (groupBy == GroupContributionBy.SPRINT) { user } else sprint,
                 pairing = pairingSet,
-                sprintTotalBugFix = bugFixes
+                sprintTotalBugFix = totalBugFix
+        )
+    }
+
+    fun mapSprintChore(data: IssuesQuery.Data, sprint: String, user: String, groupBy: GroupContributionBy): SprintChoreContribution {
+        var totalChore = 0
+        val pairingSet = mutableSetOf<String>()
+        data.search.nodes?.forEach { queryData ->
+            val issue = queryData?.asIssue
+            totalChore += 1
+            issue?.assignees?.nodes?.forEach {
+                val assignee = it?.login
+                if (assignee != null && assignee != user) {
+                    pairingSet.add(assignee)
+                }
+            }
+        }
+
+        return SprintChoreContribution(
+                key = if (groupBy == GroupContributionBy.SPRINT) { user } else sprint,
+                pairing = pairingSet,
+                sprintTotalChore = totalChore
         )
     }
 

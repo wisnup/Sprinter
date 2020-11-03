@@ -10,6 +10,7 @@ import com.wisnup.sprinter.network.GraphQlClient
 import com.wisnup.sprinter.network.OkHttpClientConfiguration
 import com.wisnup.sprinter.service.GithubService
 import com.wisnup.sprinter.usecase.CountSprintBugFix
+import com.wisnup.sprinter.usecase.CountSprintChore
 import com.wisnup.sprinter.usecase.CountSprintPrReview
 import com.wisnup.sprinter.usecase.CountSprintStory
 import okhttp3.OkHttpClient
@@ -43,7 +44,12 @@ fun beans() = beans {
         RestRouter(ref<RestRequestHandler>()).routes()
     }
     bean {
-        RestRequestHandler(ref<CountSprintStory>(), ref<CountSprintPrReview>(), ref<CountSprintBugFix>())
+        RestRequestHandler(
+                ref<CountSprintStory>(),
+                ref<CountSprintPrReview>(),
+                ref<CountSprintBugFix>(),
+                ref<CountSprintChore>()
+        )
     }
     bean {
         SprintContributionMapper()
@@ -63,5 +69,8 @@ fun beans() = beans {
     }
     bean {
         CountSprintBugFix(ref<GithubService>(), ref<AppConfig>(), ref<SprintContributionMapper>())
+    }
+    bean {
+        CountSprintChore(ref<GithubService>(), ref<AppConfig>(), ref<SprintContributionMapper>())
     }
 }

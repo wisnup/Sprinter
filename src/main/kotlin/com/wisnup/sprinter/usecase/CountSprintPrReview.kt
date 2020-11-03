@@ -21,7 +21,6 @@ class CountSprintPrReview(
         val users = appConfig.userList
         val sprints = appConfig.sprintList
 
-        // key is user
         val contributionMap = TreeMap<String, MutableList<SprintReviewContribution>>()
         users.forEach { user ->
             sprints.forEach { sprint ->

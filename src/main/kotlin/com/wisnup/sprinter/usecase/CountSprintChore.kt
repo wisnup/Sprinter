@@ -11,7 +11,7 @@ import java.util.*
 
 private val logger = KotlinLogging.logger {}
 
-class CountSprintBugFix(
+class CountSprintChore (
         private val githubService: GithubService,
         private val appConfig: AppConfig,
         private val sprintMapper: SprintContributionMapper
@@ -20,12 +20,12 @@ class CountSprintBugFix(
     suspend fun execute(groupBy: GroupContributionBy): Map<String, List<SprintBugFixContribution>> {
         val users = appConfig.userList
         val sprints = appConfig.sprintList
-        val bugLabel = appConfig.bugLabel
+        val choreLabel = appConfig.choreLabel
 
         val contributionMap = TreeMap<String, MutableList<SprintBugFixContribution>>()
         users.forEach { user ->
             sprints.forEach { sprint ->
-                val query = "is:issue is:closed assignee:$user closed:${sprint.duration} $bugLabel"
+                val query = "is:issue is:closed assignee:$user closed:${sprint.duration} $choreLabel"
                 val result = githubService.query(query)
                 val key: String = if (groupBy == GroupContributionBy.SPRINT) {
                     sprint.title
