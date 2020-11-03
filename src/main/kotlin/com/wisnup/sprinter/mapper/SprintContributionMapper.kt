@@ -1,6 +1,7 @@
 package com.wisnup.sprinter.mapper
 
 import com.github.IssuesQuery
+import com.wisnup.sprinter.model.SprintBugFixContribution
 import com.wisnup.sprinter.model.SprintReviewContribution
 import com.wisnup.sprinter.model.SprintStoryContribution
 import java.util.regex.Pattern
@@ -52,6 +53,27 @@ class SprintContributionMapper {
                 pairing = pairingSet,
                 sprint = sprint,
                 sprintTotalReview = totalReviews
+        )
+    }
+
+    fun mapSprintBugFix(data: IssuesQuery.Data, sprint: String, user: String): SprintBugFixContribution {
+        var bugFixes = 0
+        val pairingSet = mutableSetOf<String>()
+        data.search.nodes?.forEach { queryData ->
+            val issue = queryData?.asIssue
+            bugFixes += 1
+            issue?.assignees?.nodes?.forEach {
+                val assignee = it?.login
+                if (assignee != null && assignee != user) {
+                    pairingSet.add(assignee)
+                }
+            }
+        }
+
+        return SprintBugFixContribution(
+                pairing = pairingSet,
+                sprint = sprint,
+                sprintTotalBugFix = bugFixes
         )
     }
 

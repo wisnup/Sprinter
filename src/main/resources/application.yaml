@@ -7,10 +7,14 @@ config:
     - zzz
 
   sprintList: # define your sprints here
-    - title: Sprint Zero
+    - title: Sprint 44
+      duration: 2020-09-29..2020-10-12
+    - title: Sprint 45
       duration: 2020-10-13..2020-10-26
-    - title: Sprint 1
+    - title: Sprint 46
       duration: 2020-10-27..2020-11-9
+
+  bug-label: label:Bug # customize your bug label
 
 server:
   port: 8013

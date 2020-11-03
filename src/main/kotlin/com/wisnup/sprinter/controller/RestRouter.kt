@@ -11,5 +11,8 @@ class RestRouter(private val handler: RestRequestHandler) {
         "/reviews".nest {
             GET("/") { handler.getPrReviewContribution() }
         }
+        "/fixes".nest {
+            GET("/") { handler.getBugFixContribution() }
+        }
     }
 }
