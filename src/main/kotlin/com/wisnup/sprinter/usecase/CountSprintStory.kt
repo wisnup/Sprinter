@@ -33,7 +33,8 @@ class CountSprintStory (
                 }
 
                 result?.let { queryData ->
-                    logger.info("COBI story sprint ${sprint.title} ${queryData.toJson()}")
+                    logger.info("COBI story query $query")
+                    logger.info("COBI story result ${sprint.title} ${queryData.toJson()}")
                     if (contributionMap.containsKey(key)) {
                         // update user key
                         contributionMap[key]?.add(

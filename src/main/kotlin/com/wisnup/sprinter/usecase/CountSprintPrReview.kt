@@ -33,7 +33,8 @@ class CountSprintPrReview(
                 }
 
                 result?.let { queryData ->
-                    logger.info("COBI review sprint ${sprint.title} ${queryData.toJson()}")
+                    logger.info("COBI review query $query")
+                    logger.info("COBI review result ${sprint.title} ${queryData.toJson()}")
                     if (contributionMap.containsKey(key)) {
                         // update user key
                         contributionMap[key]?.add(
