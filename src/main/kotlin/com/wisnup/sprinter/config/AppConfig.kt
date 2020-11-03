@@ -7,7 +7,6 @@ class AppConfig {
     lateinit var githubUrl: String
     lateinit var githubToken: String
     lateinit var userList: List<String>
-    lateinit var repoList: List<String>
     lateinit var sprintList: List<Sprint>
     lateinit var bugLabel: String
 }

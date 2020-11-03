@@ -4,15 +4,19 @@ import org.springframework.web.reactive.function.server.coRouter
 
 class RestRouter(private val handler: RestRequestHandler) {
 
+    companion object {
+        const val groupByParam = "groupBy"
+    }
+
     fun routes() = coRouter {
         "/stories".nest {
-            GET("/") { handler.getStoryContribution() }
+            GET("/", handler::getStoryContribution)
         }
         "/reviews".nest {
-            GET("/") { handler.getPrReviewContribution() }
+            GET("/", handler::getPrReviewContribution)
         }
         "/fixes".nest {
-            GET("/") { handler.getBugFixContribution() }
+            GET("/", handler::getBugFixContribution)
         }
     }
 }

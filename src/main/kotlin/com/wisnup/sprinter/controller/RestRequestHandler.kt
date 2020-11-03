@@ -1,11 +1,14 @@
 package com.wisnup.sprinter.controller
 
+import com.wisnup.sprinter.config.GroupContributionBy
 import com.wisnup.sprinter.usecase.CountSprintBugFix
 import com.wisnup.sprinter.usecase.CountSprintPrReview
 import com.wisnup.sprinter.usecase.CountSprintStory
 import org.springframework.http.MediaType
+import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse
 import org.springframework.web.reactive.function.server.bodyValueAndAwait
+import org.springframework.web.reactive.function.server.queryParamOrNull
 
 class RestRequestHandler(
         private val countSprintStory: CountSprintStory,
@@ -13,21 +16,27 @@ class RestRequestHandler(
         private val countSprintBugFix: CountSprintBugFix
 ) {
 
-    suspend fun getStoryContribution(): ServerResponse {
+    suspend fun getStoryContribution(request: ServerRequest): ServerResponse {
+        val groupBy = request.queryParamOrNull(RestRouter.groupByParam) ?: GroupContributionBy.SPRINT.name
+        val groupContributionBy = GroupContributionBy.valueOf(groupBy.toUpperCase())
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .bodyValueAndAwait(countSprintStory.execute())
+                .bodyValueAndAwait(countSprintStory.execute(groupContributionBy))
     }
 
-    suspend fun getPrReviewContribution(): ServerResponse {
+    suspend fun getPrReviewContribution(request: ServerRequest): ServerResponse {
+        val groupBy = request.queryParamOrNull(RestRouter.groupByParam) ?: GroupContributionBy.SPRINT.name
+        val groupContributionBy = GroupContributionBy.valueOf(groupBy.toUpperCase())
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .bodyValueAndAwait(countSprintPrReview.execute())
+                .bodyValueAndAwait(countSprintPrReview.execute(groupContributionBy))
     }
 
-    suspend fun getBugFixContribution(): ServerResponse {
+    suspend fun getBugFixContribution(request: ServerRequest): ServerResponse {
+        val groupBy = request.queryParamOrNull(RestRouter.groupByParam) ?: GroupContributionBy.SPRINT.name
+        val groupContributionBy = GroupContributionBy.valueOf(groupBy.toUpperCase())
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .bodyValueAndAwait(countSprintBugFix.execute())
+                .bodyValueAndAwait(countSprintBugFix.execute(groupContributionBy))
     }
 }

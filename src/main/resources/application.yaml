@@ -14,7 +14,7 @@ config:
     - title: Sprint 46
       duration: 2020-10-27..2020-11-9
 
-  bug-label: label:Bug # customize your bug label
+  bugLabel: label:Bug # customize your bug label
 
 server:
   port: 8013
