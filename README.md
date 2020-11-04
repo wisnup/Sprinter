@@ -10,7 +10,7 @@ Simple Sprint Tracker
 ```
  Netty started on port(s): 8013
 ```
-6. Open browser and launch this url `http://localhost:8013`. Note the port might be different as it depends on your configuration. And because right now only API implemented, please use Firefox to have a nice JSON pretty print for displaying the data.
+6. Open browser and launch this url `http://localhost:8013`. Note the port might be different as it depends on your configuration. And because right now only API implemented, please use Firefox to have a nice JSON pretty print for displaying the data or hit the API directly using Postman or similar tools.
 
 # How contribution counted
 - Story, bug and chore are counted when they are closed within the sprint
@@ -19,3 +19,9 @@ Simple Sprint Tracker
 - Bug is counted when it has Bug label. Accepted label can be configured
 - Chore is counted when it has Chore label. Accepted label can be configured
 - Use wisely, each API call some Github GraphQL queries so it might hit the rate limit pretty quickly :/
+
+# Todo
+- Create simple UI to show data, maybe table or something
+- Make API calls parallel to improve loading time
+- Make the user list and sprint list as request data instead of config
+- Make the story and PR query configurable
