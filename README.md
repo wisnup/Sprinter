@@ -10,7 +10,7 @@ Simple Sprint Tracker
 ```
  Netty started on port(s): 8013
 ```
-6. Open browser and launch this url `http://localhost:8013`. Note the port might be different as it depends on your configuration.
+6. Open browser and launch this url `http://localhost:8013`. Note the port might be different as it depends on your configuration. And because right now only API implemented, please use Firefox to have a nice JSON pretty print for displaying the data.
 
 # How contribution counted
 - Story, bug and chore are counted when they are closed within the sprint
