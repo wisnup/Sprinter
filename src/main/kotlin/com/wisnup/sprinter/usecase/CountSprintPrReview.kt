@@ -40,7 +40,7 @@ class CountSprintPrReview(
                             user
                         }
 
-                        logger.info("COBI story result $query ${sprint.title} ${result?.toJson()}")
+                        logger.info("COBI pr review result $query ${sprint.title} ${result?.toJson()}")
 
                         sprintMapper.mapSprintPrReview(groupByKey, result, sprint.title, user, groupBy)
                     }
