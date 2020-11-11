@@ -38,10 +38,10 @@ class SprintContributionMapper {
         )
     }
 
-    fun mapSprintPrReview(data: IssuesQuery.Data, sprint: String, user: String, groupBy: GroupContributionBy): SprintReviewContribution {
+    fun mapSprintPrReview(groupByKey: String, data: IssuesQuery.Data?, sprint: String, user: String, groupBy: GroupContributionBy): SprintReviewContribution {
         var totalPrReview = 0
         val pairingSet = mutableSetOf<String>()
-        data.search.nodes?.forEach { queryData ->
+        data?.search?.nodes?.forEach { queryData ->
             val issue = queryData?.asIssue
             totalPrReview += 1
             issue?.assignees?.nodes?.forEach {
@@ -53,16 +53,17 @@ class SprintContributionMapper {
         }
 
         return SprintReviewContribution(
+                groupByKey = groupByKey,
                 key = if (groupBy == GroupContributionBy.SPRINT) { user } else sprint,
                 pairing = pairingSet,
                 sprintTotalReview = totalPrReview
         )
     }
 
-    fun mapSprintBugFix(data: IssuesQuery.Data, sprint: String, user: String, groupBy: GroupContributionBy): SprintBugFixContribution {
+    fun mapSprintBugFix(data: IssuesQuery.Data?, sprint: String, user: String, groupBy: GroupContributionBy): SprintBugFixContribution {
         var totalBugFix = 0
         val pairingSet = mutableSetOf<String>()
-        data.search.nodes?.forEach { queryData ->
+        data?.search?.nodes?.forEach { queryData ->
             val issue = queryData?.asIssue
             totalBugFix += 1
             issue?.assignees?.nodes?.forEach {
@@ -80,10 +81,10 @@ class SprintContributionMapper {
         )
     }
 
-    fun mapSprintChore(data: IssuesQuery.Data, sprint: String, user: String, groupBy: GroupContributionBy): SprintChoreContribution {
+    fun mapSprintChore(data: IssuesQuery.Data?, sprint: String, user: String, groupBy: GroupContributionBy): SprintChoreContribution {
         var totalChore = 0
         val pairingSet = mutableSetOf<String>()
-        data.search.nodes?.forEach { queryData ->
+        data?.search?.nodes?.forEach { queryData ->
             val issue = queryData?.asIssue
             totalChore += 1
             issue?.assignees?.nodes?.forEach {
