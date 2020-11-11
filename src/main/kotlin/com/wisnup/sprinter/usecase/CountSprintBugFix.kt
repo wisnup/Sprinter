@@ -22,7 +22,7 @@ class CountSprintBugFix(
 ) {
     private val contributionMap = TreeMap<String, MutableList<SprintBugFixContribution>>()
 
-    suspend fun execute(groupBy: GroupContributionBy): Map<String, List<SprintBugFixContribution>> {
+    suspend fun execute(groupBy: GroupContributionBy, withLinks: Boolean): Map<String, List<SprintBugFixContribution>> {
 
         val users = appConfig.userList
         val sprints = appConfig.sprintList
@@ -43,7 +43,7 @@ class CountSprintBugFix(
 
                         logger.info("COBI bug fix result $query ${sprint.title} ${result?.toJson()}")
 
-                        sprintMapper.mapSprintBugFix(groupByKey, result, sprint.title, user, groupBy)
+                        sprintMapper.mapSprintBugFix(groupByKey, result, sprint.title, user, groupBy, withLinks)
                     }
                     deferredList.add(contribution)
                 } // end each sprint

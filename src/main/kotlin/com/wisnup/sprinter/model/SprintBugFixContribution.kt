@@ -7,5 +7,6 @@ data class SprintBugFixContribution(
         val groupByKey: String,
         val key: String, // either sprint or user depends on group by
         val pairing: Set<String>,
-        val sprintTotalBugFix: Int
+        val sprintTotalBugFix: Int,
+        val links: Set<String>
 )
