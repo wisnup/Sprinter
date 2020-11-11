@@ -21,7 +21,7 @@ class RestRequestHandler(
     suspend fun getStoryContribution(request: ServerRequest): ServerResponse {
         val groupBy = request.queryParamOrNull(RestRouter.groupByParam) ?: GroupContributionBy.SPRINT.name
         val groupContributionBy = GroupContributionBy.valueOf(groupBy.toUpperCase())
-        val withLinks = request.queryParamOrNull(RestRouter.groupByParam)?.toBoolean() ?: false
+        val withLinks = request.queryParamOrNull(RestRouter.withLinksParam)?.toBoolean() ?: false
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValueAndAwait(countSprintStory.execute(groupContributionBy, withLinks))
@@ -30,7 +30,7 @@ class RestRequestHandler(
     suspend fun getPrReviewContribution(request: ServerRequest): ServerResponse {
         val groupBy = request.queryParamOrNull(RestRouter.groupByParam) ?: GroupContributionBy.SPRINT.name
         val groupContributionBy = GroupContributionBy.valueOf(groupBy.toUpperCase())
-        val withLinks = request.queryParamOrNull(RestRouter.groupByParam)?.toBoolean() ?: false
+        val withLinks = request.queryParamOrNull(RestRouter.withLinksParam)?.toBoolean() ?: false
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValueAndAwait(countSprintPrReview.execute(groupContributionBy, withLinks))
@@ -39,7 +39,7 @@ class RestRequestHandler(
     suspend fun getBugFixContribution(request: ServerRequest): ServerResponse {
         val groupBy = request.queryParamOrNull(RestRouter.groupByParam) ?: GroupContributionBy.SPRINT.name
         val groupContributionBy = GroupContributionBy.valueOf(groupBy.toUpperCase())
-        val withLinks = request.queryParamOrNull(RestRouter.groupByParam)?.toBoolean() ?: false
+        val withLinks = request.queryParamOrNull(RestRouter.withLinksParam)?.toBoolean() ?: false
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValueAndAwait(countSprintBugFix.execute(groupContributionBy, withLinks))
@@ -48,7 +48,7 @@ class RestRequestHandler(
     suspend fun getChoreContribution(request: ServerRequest): ServerResponse {
         val groupBy = request.queryParamOrNull(RestRouter.groupByParam) ?: GroupContributionBy.SPRINT.name
         val groupContributionBy = GroupContributionBy.valueOf(groupBy.toUpperCase())
-        val withLinks = request.queryParamOrNull(RestRouter.groupByParam)?.toBoolean() ?: false
+        val withLinks = request.queryParamOrNull(RestRouter.withLinksParam)?.toBoolean() ?: false
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValueAndAwait(countSprintChore.execute(groupContributionBy, withLinks))
