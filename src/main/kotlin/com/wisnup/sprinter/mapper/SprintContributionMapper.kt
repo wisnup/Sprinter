@@ -11,11 +11,11 @@ import java.util.regex.Pattern
 
 class SprintContributionMapper {
 
-    fun mapSprintStory(data: IssuesQuery.Data, sprint: String, user: String, groupBy: GroupContributionBy): SprintStoryContribution {
+    fun mapSprintStory(groupByKey: String, data: IssuesQuery.Data?, sprint: String, user: String, groupBy: GroupContributionBy): SprintStoryContribution {
         var totalStory = 0
         var totalWeight = 0
         val pairingSet = mutableSetOf<String>()
-        data.search.nodes?.forEach { queryData ->
+        data?.search?.nodes?.forEach { queryData ->
             val issue = queryData?.asIssue
             totalWeight += getWeightFromTitle(issue?.title)
             if (totalWeight > 0) {
@@ -30,6 +30,7 @@ class SprintContributionMapper {
         }
 
         return SprintStoryContribution(
+                groupByKey = groupByKey,
                 key = if (groupBy == GroupContributionBy.SPRINT) { user } else sprint,
                 pairing = pairingSet,
                 sprintTotalIssue = totalStory,
