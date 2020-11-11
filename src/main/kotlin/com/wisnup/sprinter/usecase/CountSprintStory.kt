@@ -20,9 +20,9 @@ class CountSprintStory(
         private val appConfig: AppConfig,
         private val sprintMapper: SprintContributionMapper
 ) {
-    private val contributionMap = TreeMap<String, MutableList<SprintStoryContribution>>()
+    private val contributionMap = TreeMap<String, MutableSet<SprintStoryContribution>>()
 
-    suspend fun execute(groupBy: GroupContributionBy, withLinks: Boolean): Map<String, List<SprintStoryContribution>> {
+    suspend fun execute(groupBy: GroupContributionBy, withLinks: Boolean): Map<String, Set<SprintStoryContribution>> {
         val users = appConfig.userList
         val sprints = appConfig.sprintList
 
@@ -61,7 +61,7 @@ class CountSprintStory(
         if (contributionMap.containsKey(key)) {
             contributionMap[key]?.add(contribution)
         } else {
-            contributionMap[key] = mutableListOf(contribution)
+            contributionMap[key] = mutableSetOf(contribution)
         }
     }
 }
