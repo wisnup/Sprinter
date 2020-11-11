@@ -30,14 +30,14 @@ class SprintContributionMapper {
             totalWeight += getWeightFromTitle(issue?.title)
             if (totalWeight > 0) {
                 totalStory += 1
+                if (withLinks) {
+                    linkSet.add(issue?.url.toString())
+                }
             }
             issue?.assignees?.nodes?.forEach {
                 val assignee = it?.login
                 if (assignee != null && assignee != user) {
                     pairingSet.add(assignee)
-                }
-                if (withLinks) {
-                    linkSet.add(issue.url.toString())
                 }
             }
         }
@@ -68,13 +68,13 @@ class SprintContributionMapper {
         data?.search?.nodes?.forEach { queryData ->
             val issue = queryData?.asIssue
             totalPrReview += 1
+            if (withLinks) {
+                linkSet.add(issue?.url.toString())
+            }
             issue?.assignees?.nodes?.forEach {
                 val assignee = it?.login
                 if (assignee != null && assignee != user) {
                     pairingSet.add(assignee)
-                }
-                if (withLinks) {
-                    linkSet.add(issue.url.toString())
                 }
             }
         }
@@ -104,13 +104,13 @@ class SprintContributionMapper {
         data?.search?.nodes?.forEach { queryData ->
             val issue = queryData?.asIssue
             totalBugFix += 1
+            if (withLinks) {
+                linkSet.add(issue?.url.toString())
+            }
             issue?.assignees?.nodes?.forEach {
                 val assignee = it?.login
                 if (assignee != null && assignee != user) {
                     pairingSet.add(assignee)
-                }
-                if (withLinks) {
-                    linkSet.add(issue.url.toString())
                 }
             }
         }
@@ -140,13 +140,13 @@ class SprintContributionMapper {
         data?.search?.nodes?.forEach { queryData ->
             val issue = queryData?.asIssue
             totalChore += 1
+            if (withLinks) {
+                linkSet.add(issue?.url.toString())
+            }
             issue?.assignees?.nodes?.forEach {
                 val assignee = it?.login
                 if (assignee != null && assignee != user) {
                     pairingSet.add(assignee)
-                }
-                if (withLinks) {
-                    linkSet.add(issue.url.toString())
                 }
             }
         }
