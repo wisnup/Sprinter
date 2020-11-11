@@ -125,9 +125,17 @@ class SprintContributionMapper {
         )
     }
 
-    fun mapSprintChore(groupByKey: String, data: IssuesQuery.Data?, sprint: String, user: String, groupBy: GroupContributionBy): SprintChoreContribution {
+    fun mapSprintChore(
+            groupByKey: String,
+            data: IssuesQuery.Data?,
+            sprint: String,
+            user: String,
+            groupBy: GroupContributionBy,
+            withLinks: Boolean
+    ): SprintChoreContribution {
         var totalChore = 0
         val pairingSet = mutableSetOf<String>()
+        val linkSet = mutableSetOf<String>()
         data?.search?.nodes?.forEach { queryData ->
             val issue = queryData?.asIssue
             totalChore += 1
@@ -135,6 +143,9 @@ class SprintContributionMapper {
                 val assignee = it?.login
                 if (assignee != null && assignee != user) {
                     pairingSet.add(assignee)
+                }
+                if (withLinks) {
+                    linkSet.add(issue.url.toString())
                 }
             }
         }
@@ -145,7 +156,8 @@ class SprintContributionMapper {
                     user
                 } else sprint,
                 pairing = pairingSet,
-                sprintTotalChore = totalChore
+                sprintTotalChore = totalChore,
+                links = linkSet
         )
     }
 

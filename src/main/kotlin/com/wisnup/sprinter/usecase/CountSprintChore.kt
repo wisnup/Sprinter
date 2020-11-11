@@ -23,7 +23,7 @@ class CountSprintChore(
 
     private val contributionMap = TreeMap<String, MutableList<SprintChoreContribution>>()
 
-    suspend fun execute(groupBy: GroupContributionBy): Map<String, List<SprintChoreContribution>> {
+    suspend fun execute(groupBy: GroupContributionBy, withLinks: Boolean): Map<String, List<SprintChoreContribution>> {
 
         val users = appConfig.userList
         val sprints = appConfig.sprintList
@@ -44,7 +44,7 @@ class CountSprintChore(
 
                         logger.info("COBI bug fix result $query ${sprint.title} ${result?.toJson()}")
 
-                        sprintMapper.mapSprintChore(groupByKey, result, sprint.title, user, groupBy)
+                        sprintMapper.mapSprintChore(groupByKey, result, sprint.title, user, groupBy, withLinks)
                     }
                     deferredList.add(contribution)
                 } // end each sprint
