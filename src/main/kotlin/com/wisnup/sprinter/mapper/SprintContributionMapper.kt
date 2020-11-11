@@ -60,7 +60,7 @@ class SprintContributionMapper {
         )
     }
 
-    fun mapSprintBugFix(data: IssuesQuery.Data?, sprint: String, user: String, groupBy: GroupContributionBy): SprintBugFixContribution {
+    fun mapSprintBugFix(groupByKey: String, data: IssuesQuery.Data?, sprint: String, user: String, groupBy: GroupContributionBy): SprintBugFixContribution {
         var totalBugFix = 0
         val pairingSet = mutableSetOf<String>()
         data?.search?.nodes?.forEach { queryData ->
@@ -75,6 +75,7 @@ class SprintContributionMapper {
         }
 
         return SprintBugFixContribution(
+                groupByKey = groupByKey,
                 key = if (groupBy == GroupContributionBy.SPRINT) { user } else sprint,
                 pairing = pairingSet,
                 sprintTotalBugFix = totalBugFix
