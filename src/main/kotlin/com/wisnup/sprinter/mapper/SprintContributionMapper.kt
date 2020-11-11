@@ -6,6 +6,7 @@ import com.wisnup.sprinter.model.SprintBugFixContribution
 import com.wisnup.sprinter.model.SprintChoreContribution
 import com.wisnup.sprinter.model.SprintReviewContribution
 import com.wisnup.sprinter.model.SprintStoryContribution
+import java.util.*
 import java.util.regex.Pattern
 
 
@@ -23,7 +24,7 @@ class SprintContributionMapper {
         var totalStory = 0
         var totalWeight = 0
         val pairingSet = mutableSetOf<String>()
-        val linkSet = mutableSetOf<String>()
+        val linkSet = TreeSet<String>()
         data?.search?.nodes?.forEach { queryData ->
             val issue = queryData?.asIssue
             totalWeight += getWeightFromTitle(issue?.title)
@@ -63,7 +64,7 @@ class SprintContributionMapper {
     ): SprintReviewContribution {
         var totalPrReview = 0
         val pairingSet = mutableSetOf<String>()
-        val linkSet = mutableSetOf<String>()
+        val linkSet = TreeSet<String>()
         data?.search?.nodes?.forEach { queryData ->
             val issue = queryData?.asIssue
             totalPrReview += 1
@@ -99,7 +100,7 @@ class SprintContributionMapper {
     ): SprintBugFixContribution {
         var totalBugFix = 0
         val pairingSet = mutableSetOf<String>()
-        val linkSet = mutableSetOf<String>()
+        val linkSet = TreeSet<String>()
         data?.search?.nodes?.forEach { queryData ->
             val issue = queryData?.asIssue
             totalBugFix += 1
@@ -135,7 +136,7 @@ class SprintContributionMapper {
     ): SprintChoreContribution {
         var totalChore = 0
         val pairingSet = mutableSetOf<String>()
-        val linkSet = mutableSetOf<String>()
+        val linkSet = TreeSet<String>()
         data?.search?.nodes?.forEach { queryData ->
             val issue = queryData?.asIssue
             totalChore += 1
