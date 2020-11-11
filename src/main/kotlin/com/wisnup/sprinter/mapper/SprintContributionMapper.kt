@@ -27,12 +27,13 @@ class SprintContributionMapper {
         val linkSet = TreeSet<String>()
         data?.search?.nodes?.forEach { queryData ->
             val issue = queryData?.asIssue
-            totalWeight += getWeightFromTitle(issue?.title)
-            if (totalWeight > 0) {
+            val weight = getWeightFromTitle(issue?.title)
+            if (weight > 0) {
                 totalStory += 1
+                totalWeight += weight
                 if (withLinks) {
                     issue?.let {
-                        linkSet.add("${it.title} ${it.url.toString()}")
+                        linkSet.add("${it.title} ${it.url}")
                     }
                 }
             }
@@ -72,7 +73,7 @@ class SprintContributionMapper {
             totalPrReview += 1
             if (withLinks) {
                 issue?.let {
-                    linkSet.add("${it.title} ${it.url.toString()}")
+                    linkSet.add("${it.title} ${it.url}")
                 }
             }
             issue?.assignees?.nodes?.forEach {
@@ -110,7 +111,7 @@ class SprintContributionMapper {
             totalBugFix += 1
             if (withLinks) {
                 issue?.let {
-                    linkSet.add("${it.title} ${it.url.toString()}")
+                    linkSet.add("${it.title} ${it.url}")
                 }
             }
             issue?.assignees?.nodes?.forEach {
@@ -148,7 +149,7 @@ class SprintContributionMapper {
             totalChore += 1
             if (withLinks) {
                 issue?.let {
-                    linkSet.add("${it.title} ${it.url.toString()}")
+                    linkSet.add("${it.title} ${it.url}")
                 }
             }
             issue?.assignees?.nodes?.forEach {
