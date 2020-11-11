@@ -31,7 +31,9 @@ class SprintContributionMapper {
 
         return SprintStoryContribution(
                 groupByKey = groupByKey,
-                key = if (groupBy == GroupContributionBy.SPRINT) { user } else sprint,
+                key = if (groupBy == GroupContributionBy.SPRINT) {
+                    user
+                } else sprint,
                 pairing = pairingSet,
                 sprintTotalIssue = totalStory,
                 sprintTotalPoint = totalWeight
@@ -54,7 +56,9 @@ class SprintContributionMapper {
 
         return SprintReviewContribution(
                 groupByKey = groupByKey,
-                key = if (groupBy == GroupContributionBy.SPRINT) { user } else sprint,
+                key = if (groupBy == GroupContributionBy.SPRINT) {
+                    user
+                } else sprint,
                 pairing = pairingSet,
                 sprintTotalReview = totalPrReview
         )
@@ -76,13 +80,15 @@ class SprintContributionMapper {
 
         return SprintBugFixContribution(
                 groupByKey = groupByKey,
-                key = if (groupBy == GroupContributionBy.SPRINT) { user } else sprint,
+                key = if (groupBy == GroupContributionBy.SPRINT) {
+                    user
+                } else sprint,
                 pairing = pairingSet,
                 sprintTotalBugFix = totalBugFix
         )
     }
 
-    fun mapSprintChore(data: IssuesQuery.Data?, sprint: String, user: String, groupBy: GroupContributionBy): SprintChoreContribution {
+    fun mapSprintChore(groupByKey: String, data: IssuesQuery.Data?, sprint: String, user: String, groupBy: GroupContributionBy): SprintChoreContribution {
         var totalChore = 0
         val pairingSet = mutableSetOf<String>()
         data?.search?.nodes?.forEach { queryData ->
@@ -97,7 +103,10 @@ class SprintContributionMapper {
         }
 
         return SprintChoreContribution(
-                key = if (groupBy == GroupContributionBy.SPRINT) { user } else sprint,
+                groupByKey = groupByKey,
+                key = if (groupBy == GroupContributionBy.SPRINT) {
+                    user
+                } else sprint,
                 pairing = pairingSet,
                 sprintTotalChore = totalChore
         )
