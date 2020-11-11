@@ -53,9 +53,17 @@ class SprintContributionMapper {
         )
     }
 
-    fun mapSprintPrReview(groupByKey: String, data: IssuesQuery.Data?, sprint: String, user: String, groupBy: GroupContributionBy): SprintReviewContribution {
+    fun mapSprintPrReview(
+            groupByKey: String,
+            data: IssuesQuery.Data?,
+            sprint: String,
+            user: String,
+            groupBy: GroupContributionBy,
+            withLinks: Boolean
+    ): SprintReviewContribution {
         var totalPrReview = 0
         val pairingSet = mutableSetOf<String>()
+        val linkSet = mutableSetOf<String>()
         data?.search?.nodes?.forEach { queryData ->
             val issue = queryData?.asIssue
             totalPrReview += 1
@@ -63,6 +71,9 @@ class SprintContributionMapper {
                 val assignee = it?.login
                 if (assignee != null && assignee != user) {
                     pairingSet.add(assignee)
+                }
+                if (withLinks) {
+                    linkSet.add(issue.url.toString())
                 }
             }
         }
@@ -73,7 +84,8 @@ class SprintContributionMapper {
                     user
                 } else sprint,
                 pairing = pairingSet,
-                sprintTotalReview = totalPrReview
+                sprintTotalReview = totalPrReview,
+                links = linkSet
         )
     }
 

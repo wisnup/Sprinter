@@ -30,9 +30,10 @@ class RestRequestHandler(
     suspend fun getPrReviewContribution(request: ServerRequest): ServerResponse {
         val groupBy = request.queryParamOrNull(RestRouter.groupByParam) ?: GroupContributionBy.SPRINT.name
         val groupContributionBy = GroupContributionBy.valueOf(groupBy.toUpperCase())
+        val withLinks = request.queryParamOrNull(RestRouter.groupByParam)?.toBoolean() ?: false
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .bodyValueAndAwait(countSprintPrReview.execute(groupContributionBy))
+                .bodyValueAndAwait(countSprintPrReview.execute(groupContributionBy, withLinks))
     }
 
     suspend fun getBugFixContribution(request: ServerRequest): ServerResponse {

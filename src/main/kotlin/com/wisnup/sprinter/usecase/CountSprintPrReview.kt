@@ -22,7 +22,7 @@ class CountSprintPrReview(
 ) {
     private val contributionMap = TreeMap<String, MutableList<SprintReviewContribution>>()
 
-    suspend fun execute(groupBy: GroupContributionBy): Map<String, List<SprintReviewContribution>> {
+    suspend fun execute(groupBy: GroupContributionBy, withLinks: Boolean): Map<String, List<SprintReviewContribution>> {
 
         val users = appConfig.userList
         val sprints = appConfig.sprintList
@@ -42,7 +42,7 @@ class CountSprintPrReview(
 
                         logger.info("COBI pr review result $query ${sprint.title} ${result?.toJson()}")
 
-                        sprintMapper.mapSprintPrReview(groupByKey, result, sprint.title, user, groupBy)
+                        sprintMapper.mapSprintPrReview(groupByKey, result, sprint.title, user, groupBy, withLinks)
                     }
                     deferredList.add(contribution)
                 } // end each sprint

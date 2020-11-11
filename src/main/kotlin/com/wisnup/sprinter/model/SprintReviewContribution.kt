@@ -7,5 +7,6 @@ data class SprintReviewContribution(
         val groupByKey: String,
         val key: String, // either sprint or user depends on group by
         val pairing: Set<String>,
-        val sprintTotalReview: Int
+        val sprintTotalReview: Int,
+        val links: Set<String>
 )
