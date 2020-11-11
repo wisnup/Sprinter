@@ -31,7 +31,9 @@ class SprintContributionMapper {
             if (totalWeight > 0) {
                 totalStory += 1
                 if (withLinks) {
-                    linkSet.add(issue?.url.toString())
+                    issue?.let {
+                        linkSet.add("${it.title} ${it.url.toString()}")
+                    }
                 }
             }
             issue?.assignees?.nodes?.forEach {
@@ -69,7 +71,9 @@ class SprintContributionMapper {
             val issue = queryData?.asIssue
             totalPrReview += 1
             if (withLinks) {
-                linkSet.add(issue?.url.toString())
+                issue?.let {
+                    linkSet.add("${it.title} ${it.url.toString()}")
+                }
             }
             issue?.assignees?.nodes?.forEach {
                 val assignee = it?.login
@@ -105,7 +109,9 @@ class SprintContributionMapper {
             val issue = queryData?.asIssue
             totalBugFix += 1
             if (withLinks) {
-                linkSet.add(issue?.url.toString())
+                issue?.let {
+                    linkSet.add("${it.title} ${it.url.toString()}")
+                }
             }
             issue?.assignees?.nodes?.forEach {
                 val assignee = it?.login
@@ -141,7 +147,9 @@ class SprintContributionMapper {
             val issue = queryData?.asIssue
             totalChore += 1
             if (withLinks) {
-                linkSet.add(issue?.url.toString())
+                issue?.let {
+                    linkSet.add("${it.title} ${it.url.toString()}")
+                }
             }
             issue?.assignees?.nodes?.forEach {
                 val assignee = it?.login
