@@ -25,13 +25,14 @@ class CountSprintStory(
     suspend fun execute(groupBy: GroupContributionBy, withLinks: Boolean): Map<String, Set<SprintStoryContribution>> {
         val users = appConfig.userList
         val sprints = appConfig.sprintList
+        val storyQuery = appConfig.storyQuery
 
         val deferredList = mutableListOf<Deferred<SprintStoryContribution>>()
         coroutineScope {
             sprints.forEach { sprint ->
                 users.forEach { user ->
                     val contribution = async {
-                        val query = "is:issue is:closed assignee:$user closed:${sprint.duration}"
+                        val query = storyQuery.replace("?user", user).replace("?sprint", sprint.duration)
                         val result = githubService.query(query)
                         val groupByKey: String = if (groupBy == GroupContributionBy.SPRINT) {
                             sprint.title

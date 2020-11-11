@@ -18,6 +18,8 @@ config:
 
   bugLabel: label:Bug # customize your bug label
   choreLabel: label:Chore # customize your chore label
+  storyQuery: is:issue is:closed assignee:?user closed:?sprint #android team query, can be customized
+#  storyQuery: is:issue is:closed assignee:?user milestone:"Sprint 44" #when ?sprint excluded from query only 1 'sprint' should be included in sprintList
 
 server:
   port: 8013
