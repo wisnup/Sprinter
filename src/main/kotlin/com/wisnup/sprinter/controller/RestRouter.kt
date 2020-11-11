@@ -6,6 +6,7 @@ class RestRouter(private val handler: RestRequestHandler) {
 
     companion object {
         const val groupByParam = "groupBy"
+        const val withLinksParam = "withLinks"
     }
 
     fun routes() = coRouter {
