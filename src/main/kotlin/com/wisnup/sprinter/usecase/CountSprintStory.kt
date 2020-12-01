@@ -33,7 +33,7 @@ class CountSprintStory(
                 users.forEach { user ->
                     val contribution = async {
                         val query = storyQuery.replace("?user", user).replace("?sprint", sprint.duration)
-                        val result = githubService.query(query)
+                        val result = githubService.queryIssue(query)
                         val groupByKey: String = if (groupBy == GroupContributionBy.SPRINT) {
                             sprint.title
                         } else {

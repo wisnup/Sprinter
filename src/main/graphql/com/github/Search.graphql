@@ -43,6 +43,8 @@ query Review($query: String!) {
         nodes {
             ... on PullRequest {
                 id
+                title
+                url
                 assignees(first: 1) {
                     nodes {
                         login

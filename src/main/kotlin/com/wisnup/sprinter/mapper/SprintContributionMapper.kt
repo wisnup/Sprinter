@@ -1,6 +1,7 @@
 package com.wisnup.sprinter.mapper
 
 import com.github.IssuesQuery
+import com.github.ReviewQuery
 import com.wisnup.sprinter.config.GroupContributionBy
 import com.wisnup.sprinter.model.SprintBugFixContribution
 import com.wisnup.sprinter.model.SprintChoreContribution
@@ -59,7 +60,7 @@ class SprintContributionMapper {
 
     fun mapSprintPrReview(
             groupByKey: String,
-            data: IssuesQuery.Data?,
+            data: ReviewQuery.Data?,
             sprint: String,
             user: String,
             groupBy: GroupContributionBy,
@@ -69,7 +70,7 @@ class SprintContributionMapper {
         val pairingSet = mutableSetOf<String>()
         val linkSet = TreeSet<String>()
         data?.search?.nodes?.forEach { queryData ->
-            val issue = queryData?.asIssue
+            val issue = queryData?.asPullRequest
             totalPrReview += 1
             if (withLinks) {
                 issue?.let {

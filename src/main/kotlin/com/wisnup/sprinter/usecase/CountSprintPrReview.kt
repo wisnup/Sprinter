@@ -33,7 +33,7 @@ class CountSprintPrReview(
                 users.forEach { user ->
                     val contribution = async {
                         val query = "is:pr is:closed assignee:$user merged:${sprint.duration}"
-                        val result = githubService.query(query)
+                        val result = githubService.queryPullRequest(query)
                         val groupByKey: String = if (groupBy == GroupContributionBy.SPRINT) {
                             sprint.title
                         } else {

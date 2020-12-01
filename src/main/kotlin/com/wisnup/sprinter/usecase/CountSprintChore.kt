@@ -35,7 +35,7 @@ class CountSprintChore(
                 users.forEach { user ->
                     val contribution = async {
                         val query = "is:issue is:closed assignee:$user closed:${sprint.duration} $choreLabel"
-                        val result = githubService.query(query)
+                        val result = githubService.queryIssue(query)
                         val groupByKey: String = if (groupBy == GroupContributionBy.SPRINT) {
                             sprint.title
                         } else {
