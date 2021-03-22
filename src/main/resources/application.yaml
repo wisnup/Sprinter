@@ -3,14 +3,8 @@ config:
   githubToken: xxx # GH personal access token
 
   userList: # GH username list
-    - andaeys
-    - ayinozendy
-    - denicahyawintaka
-    - liauli
-    - mcaras
-    - leo0263
-    - naufalazzaahid
-    - wildhanstrdy
+    - yyy
+    - zzz
 
   sprintList: # define your sprints here
     - title: Sprint 44
@@ -34,7 +28,7 @@ config:
     - title: Sprint 53
       duration: 2021-03-16..2021-03-29
 
-  #android team query, can be customized. For example, 'closed' can be replaced by 'created'
+  # Query can be customized. For example, 'closed' can be replaced by 'created'
   storyQuery: is:issue is:closed assignee:?user closed:?sprint
   bugQuery: is:issue is:closed assignee:?user closed:?sprint label:Bug
   choreQuery: is:issue is:closed assignee:?user closed:?sprint label:Chore
