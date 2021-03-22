@@ -11,4 +11,6 @@ class AppConfig {
     lateinit var bugLabel: String
     lateinit var choreLabel: String
     lateinit var storyQuery: String
+    lateinit var bugQuery: String
+    lateinit var choreQuery: String
 }

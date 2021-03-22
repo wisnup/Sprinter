@@ -1,14 +1,18 @@
 config:
   githubUrl: https://api.github.com/graphql # change if you use GH enterprise
-  githubToken: zzz # GH personal access token
+  githubToken: xxx # GH personal access token
 
   userList: # GH username list
-    - wisnup
-    - zzz
+    - andaeys
+    - ayinozendy
+    - denicahyawintaka
+    - liauli
+    - mcaras
+    - leo0263
+    - naufalazzaahid
+    - wildhanstrdy
 
   sprintList: # define your sprints here
-#    - title: Sprint 43 # H1 2020
-#      duration: 2020-09-15..2020-09-28
     - title: Sprint 44
       duration: 2020-09-29..2020-10-12
     - title: Sprint 45
@@ -17,12 +21,23 @@ config:
       duration: 2020-11-03..2020-11-23
     - title: Sprint 47
       duration: 2020-11-24..2020-11-07
+    - title: Sprint 48
+      duration: 2020-12-08..2021-01-04
+    - title: Sprint 49
+      duration: 2021-01-13..2021-02-01
+    - title: Sprint 50
+      duration: 2021-02-02..2021-02-16
+    - title: Sprint 51
+      duration: 2021-02-16..2021-03-01
+    - title: Sprint 52
+      duration: 2021-03-02..2021-03-15
+    - title: Sprint 53
+      duration: 2021-03-16..2021-03-29
 
-  bugLabel: label:Bug # customize your bug label
-  choreLabel: label:Chore # customize your chore label
-
-  #android team query, can be customized
+  #android team query, can be customized. For example, 'closed' can be replaced by 'created'
   storyQuery: is:issue is:closed assignee:?user closed:?sprint
+  bugQuery: is:issue is:closed assignee:?user closed:?sprint label:Bug
+  choreQuery: is:issue is:closed assignee:?user closed:?sprint label:Chore
 
 server:
   port: 8013

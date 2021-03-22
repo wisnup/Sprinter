@@ -27,14 +27,14 @@ class CountSprintChore(
 
         val users = appConfig.userList
         val sprints = appConfig.sprintList
-        val choreLabel = appConfig.choreLabel
+        val choreQuery = appConfig.choreQuery
 
         val deferredList = mutableListOf<Deferred<SprintChoreContribution>>()
         coroutineScope {
             sprints.forEach { sprint ->
                 users.forEach { user ->
                     val contribution = async {
-                        val query = "is:issue is:closed assignee:$user closed:${sprint.duration} $choreLabel"
+                        val query = choreQuery.replace("?user", user).replace("?sprint", sprint.duration)
                         val result = githubService.queryIssue(query)
                         val groupByKey: String = if (groupBy == GroupContributionBy.SPRINT) {
                             sprint.title

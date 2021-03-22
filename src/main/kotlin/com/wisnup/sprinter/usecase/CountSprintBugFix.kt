@@ -26,14 +26,14 @@ class CountSprintBugFix(
 
         val users = appConfig.userList
         val sprints = appConfig.sprintList
-        val bugLabel = appConfig.bugLabel
+        val bugQuery = appConfig.bugQuery
 
         val deferredList = mutableListOf<Deferred<SprintBugFixContribution>>()
         coroutineScope {
             sprints.forEach { sprint ->
                 users.forEach { user ->
                     val contribution = async {
-                        val query = "is:issue is:closed assignee:$user closed:${sprint.duration} $bugLabel"
+                        val query = bugQuery.replace("?user", user).replace("?sprint", sprint.duration)
                         val result = githubService.queryIssue(query)
                         val groupByKey: String = if (groupBy == GroupContributionBy.SPRINT) {
                             sprint.title
